@@ -1,15 +1,18 @@
-var Backbone = require("backbone");
-var Constants = require("./Constants");
+// Model/Collection representing expenses.
 
-function getSymbol(currency) {
-    return Constants.CURRENCIES[currency];
-}
+var Backbone = require("backbone");
+var Currencies = require("./Currencies");
 
 var Expense = Backbone.Model.extend({
 
+    initialize: function(attrs) {
+        // Replace currency code with a Currency model.
+        this.set("currency", Currencies.get(attrs.currency));
+    },
+
     formattedAmt: function() {
         var amt = this.get("amt");
-        var symbol = getSymbol(this.get("currency"));
+        var symbol = this.get("currency").get("symbol");
         return `${amt}${symbol}`;
     }
 });
@@ -28,16 +31,16 @@ var Expenses = Backbone.Collection.extend({
 
     formattedTotal: function() {
         // TODO: deal with mixed currencies.
-        var currencies = this.pluck("currency");
-        var currency = currencies.length > 0 ? currencies[0] : "";
-
         var amts = this.pluck("amt");
         var total = amts.reduce((a, b) => a + b, 0);
-        return total > 0 ? `${total}${getSymbol(currency)}` : "";
+        if (total > 0) {
+            var currency = this.pluck("currency")[0];
+            var symbol = currency.get("symbol");
+            return `${total}${symbol}`;
+        }
+        return "";
     }
 });
 
-module.exports = {
-    Expense: Expense,
-    Expenses: Expenses
-};
+Expenses.Expense = Expense;
+module.exports = Expenses;

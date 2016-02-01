@@ -23,7 +23,6 @@ $ bower install
 TODO
 ====
 - Fix ids.
-- Make a Currency model?
 - Use Bower to manage front-end libs (eliminates lib/).
 - Deploy to heroku.
 - Write server.

@@ -1,3 +1,6 @@
+// Actions are dispatched (e.g. by a view) to the Stores, and
+// include a payload of data.
+
 var Dispatcher = require("./Dispatcher");
 var Constants = require("./Constants");
 

@@ -1,3 +1,5 @@
+// Define global constants.
+
 module.exports = {
 
     SET_DATE: "SET_DATE",
@@ -5,13 +7,6 @@ module.exports = {
     SET_DESC: "SET_DESC",
     ADD_EXPENSE: "ADD_EXPENSE",
     DELETE_EXPENSE: "DELETE_EXPENSE",
-
-    CURRENCIES: {
-        "USD": "$",
-        "EUR": "€",
-        "THB": "฿",
-        "JPY": "¥"
-    },
 
     TAGS: [
         "Food",

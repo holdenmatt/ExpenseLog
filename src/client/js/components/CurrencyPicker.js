@@ -1,25 +1,30 @@
+// Select a currency.
+
 var Actions = require("../Actions");
-var Constants = require("../Constants");
+var Currencies = require("../models/Currencies");
 var React = require("react");
 var Select = require("react-select");
+var classNames = require("classnames");
 
 var CurrencyPicker = React.createClass({
 
     propTypes: {
+        className: React.PropTypes.string,
         currency: React.PropTypes.string.isRequired
     },
 
     render: function() {
-        var options = _.map(Constants.CURRENCIES, function(symbol, code) {
+        var options = Currencies.map(function(currency) {
             return {
-                value: code,
-                label: `${code} (${symbol})`
+                value: currency.get("id"),
+                label: currency.getName()
             };
         });
 
+        var classes = classNames("CurrencyPicker", this.props.className);
         return (
             <Select
-                className="CurrencyPicker pull-right"
+                className={classes}
                 options={options}
                 value={this.props.currency}
                 clearable={false}

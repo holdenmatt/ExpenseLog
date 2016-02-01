@@ -1,3 +1,5 @@
+// Enter a description for the current date.
+
 var Actions = require("../Actions");
 var React = require("react");
 

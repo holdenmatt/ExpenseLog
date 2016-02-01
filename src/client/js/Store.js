@@ -1,17 +1,19 @@
+// The Store contains the application state and logic for a domain.
+// We use Backbone Models/Collections to manage this data.
+
 var Constants = require("./Constants");
 var Dispatcher = require("./Dispatcher");
 var EventEmitter = require("events").EventEmitter;
-var Models = require("./Models");
+var Expenses = require("./models/Expenses");
 var assign = require("object-assign");
 var moment = require("moment");
-
 
 // Define the private data.
 var _store = {
     date: moment(),
     currency: "THB",
     desc: "Travel day - Chiang Mai to Chiang Rai",
-    expenses: new Models.Expenses()
+    expenses: new Expenses()
 };
 
 var IDS = 0;

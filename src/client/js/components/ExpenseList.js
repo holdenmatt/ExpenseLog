@@ -1,14 +1,16 @@
+// Display expenses.
+
 var Actions = require("../Actions");
-var Constants = require("../Constants");
-var Models = require("../Models");
+var Expenses = require("../models/Expenses");
 var React = require("react");
 var PropTypes = React.PropTypes;
 
+// Display a header/total, list of expenses, and input to add new ones.
 var ExpenseList = React.createClass({
 
     propTypes: {
         tag: PropTypes.string.isRequired,
-        expenses: PropTypes.instanceOf(Models.Expenses).isRequired
+        expenses: PropTypes.instanceOf(Expenses).isRequired
     },
 
     render: function() {
@@ -22,7 +24,7 @@ var ExpenseList = React.createClass({
         });
         return (
             <div>
-                <ExpenseCategory tag={tag} expenses={expenses} />
+                <ExpenseHeader tag={tag} expenses={expenses} />
                 {rows}
                 <ExpenseInput tag={tag} />
             </div>
@@ -30,11 +32,12 @@ var ExpenseList = React.createClass({
     }
 });
 
-var ExpenseCategory = React.createClass({
+// Display the tag header and expense total.
+var ExpenseHeader = React.createClass({
 
     propTypes: {
         tag: PropTypes.string.isRequired,
-        expenses: PropTypes.instanceOf(Models.Expenses).isRequired
+        expenses: PropTypes.instanceOf(Expenses).isRequired
     },
 
     render: function() {
@@ -49,10 +52,11 @@ var ExpenseCategory = React.createClass({
     }
 });
 
+// Display a single expense.
 var ExpenseRow = React.createClass({
 
     propTypes: {
-        expense: PropTypes.instanceOf(Models.Expense).isRequired
+        expense: PropTypes.instanceOf(Expenses.Expense).isRequired
     },
 
     render: function() {
@@ -77,6 +81,7 @@ var ExpenseRow = React.createClass({
     }
 });
 
+// Display an input to add a new expense for a given tag.
 var ExpenseInput = React.createClass({
 
     propTypes: {

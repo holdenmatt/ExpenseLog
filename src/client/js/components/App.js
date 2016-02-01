@@ -49,8 +49,8 @@ var App = React.createClass({
         return (
             <div className="App">
                 <div className="clearfix">
-                    <DatePicker date={this.state.date} />
-                    <CurrencyPicker currency={this.state.currency} />
+                    <DatePicker date={this.state.date} className="pull-left" />
+                    <CurrencyPicker currency={this.state.currency} className="pull-right" />
                 </div>
 
                 <DescriptionInput value={this.state.desc} />
