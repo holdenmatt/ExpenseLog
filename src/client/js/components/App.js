@@ -36,9 +36,8 @@ var App = React.createClass({
     },
 
     render: function() {
-        var expensesByTag = _.groupBy(this.state.expenses, "tag");
         var lists = Constants.TAGS.map((tag, index) => {
-            var expenses = expensesByTag[tag] || [];
+            var expenses = this.state.expenses.forTag(tag);
             return (
                 <ExpenseList
                     tag={tag}

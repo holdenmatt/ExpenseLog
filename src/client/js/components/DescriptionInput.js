@@ -3,6 +3,10 @@ var React = require("react");
 
 var DescriptionInput = React.createClass({
 
+    propTypes: {
+        value: React.PropTypes.string.isRequired
+    },
+
     getInitialState: function() {
         return {
             value: this.props.value

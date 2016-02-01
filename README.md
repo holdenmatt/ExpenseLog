@@ -4,10 +4,12 @@ TravelLog
 A simple daily tracker for travel expenses.
 
 Uses:
-* ReactJS + Flux for the front-end
-* Bootstrap for stying
-* Backbone.js to manage data models / syncing
-* A Flask API + PostgreSQL for persistence
+* Backbone.js to manage data models/collections, events, and syncing
+* ReactJS views
+* Flux architecture
+* Bootstrap for component styling
+* Flask for a simple Python REST API
+* PostgreSQL for persistence
 * Browserify to build; Babel for ES2015 + JSX transpilation
 
 
@@ -20,9 +22,10 @@ $ bower install
 
 TODO
 ====
+- Fix ids.
+- Make a Currency model?
 - Use Bower to manage front-end libs (eliminates lib/).
-- Use Backbone to mange models.
 - Deploy to heroku.
 - Write server.
 - Make currency sticky.
-- Handle mixed currency totals?
+- Handle mixed currency totals

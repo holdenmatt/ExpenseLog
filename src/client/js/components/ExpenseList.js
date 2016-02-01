@@ -1,26 +1,30 @@
 var Actions = require("../Actions");
 var Constants = require("../Constants");
+var Models = require("../Models");
 var React = require("react");
 var PropTypes = React.PropTypes;
 
 var ExpenseList = React.createClass({
 
+    propTypes: {
+        tag: PropTypes.string.isRequired,
+        expenses: PropTypes.instanceOf(Models.Expenses).isRequired
+    },
+
     render: function() {
-        var rows = this.props.expenses.map(function(exp) {
+        var expenses = this.props.expenses;
+        var tag = this.props.tag;
+
+        var rows = expenses.map(function(expense, index) {
             return (
-                <ExpenseRow
-                    id={exp.id}
-                    amt={exp.amt}
-                    currency={exp.currency}
-                    desc={exp.desc}
-                    key={exp.id} />
+                <ExpenseRow expense={expense} key={index} />
             );
         });
         return (
             <div>
-                <ExpenseCategory tag={this.props.tag} expenses={this.props.expenses} />
+                <ExpenseCategory tag={tag} expenses={expenses} />
                 {rows}
-                <ExpenseInput tag={this.props.tag} onAdd={this.props.onAdd} />
+                <ExpenseInput tag={tag} />
             </div>
         );
     }
@@ -28,19 +32,18 @@ var ExpenseList = React.createClass({
 
 var ExpenseCategory = React.createClass({
 
-    total: function() {
-        // TODO: deal with mixed currencies.
-
-        var amts = _.pluck(this.props.expenses, "amt");
-        var total = amts.reduce((a, b) => a + b, 0);
-        return total > 0 ? total : "";
+    propTypes: {
+        tag: PropTypes.string.isRequired,
+        expenses: PropTypes.instanceOf(Models.Expenses).isRequired
     },
 
     render: function() {
+        var tag = this.props.tag;
+        var expenses = this.props.expenses;
         return (
             <div className="clearfix">
-                <h3 className="pull-left">{this.props.tag}</h3>
-                <h3 className="pull-right">{this.total()}</h3>
+                <h3 className="pull-left">{tag}</h3>
+                <h3 className="pull-right">{expenses.formattedTotal()}</h3>
             </div>
         );
     }
@@ -49,20 +52,19 @@ var ExpenseCategory = React.createClass({
 var ExpenseRow = React.createClass({
 
     propTypes: {
-        id: PropTypes.string.isRequired,
-        amt: PropTypes.number.isRequired,
-        currency: PropTypes.string.isRequired,
-        desc: PropTypes.string.isRequired
+        expense: PropTypes.instanceOf(Models.Expense).isRequired
     },
 
     render: function() {
-        var symbol = Constants.CURRENCIES[this.props.currency];
-        var amt = `${this.props.amt}${symbol}`;
+        var exp = this.props.expense;
         return (
             <div className="ExpenseRow clearfix">
-                <span className="amt">{amt} </span>
-                <span className="desc">- {this.props.desc}</span>
-                <button className="close pull-right" onClick={this.onDeleteClick} tabIndex="-1">&times;</button>
+                <span className="amt">{exp.formattedAmt()}</span>
+                <span className="desc"> - {exp.get("desc")}</span>
+                <button
+                    className="close pull-right"
+                    onClick={this.onDeleteClick}
+                    tabIndex="-1">&times;</button>
             </div>
         );
     },
@@ -70,12 +72,16 @@ var ExpenseRow = React.createClass({
     onDeleteClick: function() {
         var result = confirm("Really delete this?");
         if (result) {
-            Actions.deleteExpense(this.props.id);
+            Actions.deleteExpense(this.props.expense.get("id"));
         }
     }
 });
 
 var ExpenseInput = React.createClass({
+
+    propTypes: {
+        tag: PropTypes.string.isRequired
+    },
 
     render: function() {
         return (

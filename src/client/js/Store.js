@@ -1,17 +1,17 @@
 var Constants = require("./Constants");
 var Dispatcher = require("./Dispatcher");
 var EventEmitter = require("events").EventEmitter;
+var Models = require("./Models");
 var assign = require("object-assign");
 var moment = require("moment");
 
-var CHANGE = "change";
 
 // Define the private data.
 var _store = {
     date: moment(),
     currency: "THB",
     desc: "Travel day - Chiang Mai to Chiang Rai",
-    expenses: {}
+    expenses: new Models.Expenses()
 };
 
 var IDS = 0;
@@ -20,19 +20,20 @@ function createExpense(tag, amt, desc) {
     var date = _store.date;
     var currency = _store.currency;
 
-    // Use the current timestamp in place of a real id.
+    // Use the current timestamp in place of a real id for now.
+    // TODO: fix this.
     var now = Date.now();
     var id = `${now}-${IDS++}`;
 
-    _store.expenses[id] = {
+    _store.expenses.add({
         id: id,
         date: date,
+        currency: currency,
         tag: tag,
         amt: amt,
-        currency: currency,
         desc: desc,
-        created: now
-    };
+        created: Date.now()
+    });
 }
 
 // Test data
@@ -57,16 +58,19 @@ var Store = assign({}, EventEmitter.prototype, {
 
     // Get expenses for the current date.
     getExpenses: function() {
-        // TODO: fix this.
-        return _store.expenses;
+        return _store.expenses.forDate(_store.date);
     },
 
     addChangeListener: function(cb) {
-        this.on(CHANGE, cb);
+        this.on("change", cb);
     },
 
     removeChangeListener: function(cb) {
-        this.removeListener(CHANGE, cb)
+        this.removeListener("change", cb)
+    },
+
+    emitChange: function() {
+        this.emit("change");
     }
 });
 
@@ -77,32 +81,33 @@ Dispatcher.register(function(payload) {
     switch(action.actionType) {
         case Constants.SET_DATE:
             _store.date = action.date;
-            Store.emit(CHANGE);
+            Store.emitChange();
             break;
 
         case Constants.SET_CURRENCY:
             _store.currency = action.currency;
-            Store.emit(CHANGE);
+            Store.emitChange();
             break;
 
         case Constants.SET_DESC:
             _store.desc = action.desc;
-            Store.emit(CHANGE);
+            Store.emitChange();
             break;
 
         case Constants.ADD_EXPENSE:
             var exp = action.expense;
             createExpense(exp.tag, exp.amt, exp.desc);
-            Store.emit(CHANGE);
+            Store.emitChange();
             break;
 
         case Constants.DELETE_EXPENSE:
-            delete _store.expenses[action.id];
-            Store.emit(CHANGE);
+            _store.expenses.remove(action.id);
+            Store.emitChange();
             break;
     }
 
-    return true; // No errors. Needed by promise in Dispatcher.
+    // No errors. Needed by promise in Dispatcher.
+    return true;
 });
 
 module.exports = Store;

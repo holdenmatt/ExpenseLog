@@ -1,8 +1,13 @@
 var Actions = require("../Actions");
 var React = require("react");
 var ReactDatePicker = require("react-datepicker");
+var moment = require("moment");
 
 var DatePicker = React.createClass({
+
+    propTypes: {
+        date: React.PropTypes.instanceOf(moment).isRequired
+    },
 
     render: function() {
         return (

@@ -5,6 +5,10 @@ var Select = require("react-select");
 
 var CurrencyPicker = React.createClass({
 
+    propTypes: {
+        currency: React.PropTypes.string.isRequired
+    },
+
     render: function() {
         var options = _.map(Constants.CURRENCIES, function(symbol, code) {
             return {

@@ -6,7 +6,6 @@
   "repository": "https://github.com/holdenmatt/TravelLog",
   "main": "src/main.js",
   "license": "MIT",
-
   "scripts": {
     "build:js": "browserify src/client/js/main.js -o build/bundle.js -t babelify",
     "build:css": "cat src/client/css/*.css > build/bundle.css",
@@ -19,10 +18,11 @@
     "start": "http-server -p 9090 .",
     "clean": "rm -r build/*"
   },
-
   "dependencies": {
+    "backbone": "^1.2.3",
     "events": "^1.1.0",
     "flux": "^2.1.1",
+    "jquery": "^2.2.0",
     "moment": "^2.11.1",
     "object-assign": "^4.0.1",
     "react": "^0.14.7",
