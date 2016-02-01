@@ -1,36 +1,32 @@
 // The Store contains the application state and logic for a domain.
-// We use Backbone Models/Collections to manage this data.
 
+var Backbone = require("backbone");
 var Constants = require("./Constants");
 var Dispatcher = require("./Dispatcher");
-var EventEmitter = require("events").EventEmitter;
 var Expenses = require("./models/Expenses");
-var assign = require("object-assign");
 var moment = require("moment");
+var _ = require("underscore");
 
-// Define the private data.
-var _store = {
+// Define a private store. We use Backbone change events in place of
+// EventEmitter (as in the Flux docs).
+var _store = new Backbone.Model({
     date: moment(),
     currency: "THB",
     desc: "Travel day - Chiang Mai to Chiang Rai",
     expenses: new Expenses()
-};
+});
 
-var IDS = 0;
-function createExpense(tag, amt, desc) {
+// Trigger a change event when expenses changes.
+_store.get("expenses").on("all", function() {
+    _store.trigger("change");
+});
+
+function addExpense(tag, amt, desc) {
     // Use the current date and currency.
-    var date = _store.date;
-    var currency = _store.currency;
-
-    // Use the current timestamp in place of a real id for now.
-    // TODO: fix this.
-    var now = Date.now();
-    var id = `${now}-${IDS++}`;
-
-    _store.expenses.add({
-        id: id,
-        date: date,
-        currency: currency,
+    _store.get("expenses").add({
+        id: _.uniqueId(),
+        date: _store.get("date"),
+        currency: _store.get("currency"),
         tag: tag,
         amt: amt,
         desc: desc,
@@ -39,77 +35,75 @@ function createExpense(tag, amt, desc) {
 }
 
 // Test data
-createExpense("Food", 100, "khao soi lunch");
-createExpense("Food", 250, "dinner and beers");
-createExpense("Transport", 1000, "bus to chiang rai");
+addExpense("Food", 100, "khao soi lunch");
+addExpense("Food", 250, "dinner and beers");
+addExpense("Transport", 1000, "bus to chiang rai");
 
-// Define public methods for views to listen for changes and retrieve data.
-var Store = assign({}, EventEmitter.prototype, {
-
-    getDate: function() {
-        return _store.date;
-    },
-
-    getCurrency: function() {
-        return _store.currency;
-    },
-
-    getDesc: function() {
-        return _store.desc;
-    },
-
-    // Get expenses for the current date.
-    getExpenses: function() {
-        return _store.expenses.forDate(_store.date);
-    },
-
-    addChangeListener: function(cb) {
-        this.on("change", cb);
-    },
-
-    removeChangeListener: function(cb) {
-        this.removeListener("change", cb)
-    },
-
-    emitChange: function() {
-        this.emit("change");
-    }
-});
-
-// Register actions with the dispatcher: update data and emit a change.
+// Handle actions from the dispatcher; this is the only way data is modified.
 Dispatcher.register(function(payload) {
     var action = payload.action;
 
     switch(action.actionType) {
         case Constants.SET_DATE:
-            _store.date = action.date;
-            Store.emitChange();
+            _store.set({
+                date: action.date
+            });
             break;
 
         case Constants.SET_CURRENCY:
-            _store.currency = action.currency;
-            Store.emitChange();
+            _store.set({
+                currency: action.currency
+            });
             break;
 
         case Constants.SET_DESC:
-            _store.desc = action.desc;
-            Store.emitChange();
+            _store.set({
+                desc: action.desc
+            });
             break;
 
         case Constants.ADD_EXPENSE:
+            // Use the current date and currency.
             var exp = action.expense;
-            createExpense(exp.tag, exp.amt, exp.desc);
-            Store.emitChange();
+            addExpense(exp.tag, exp.amt, exp.desc);
             break;
 
         case Constants.DELETE_EXPENSE:
-            _store.expenses.remove(action.id);
-            Store.emitChange();
+            _store.get("expenses").remove(action.id);
             break;
     }
 
     // No errors. Needed by promise in Dispatcher.
     return true;
 });
+
+// Define public methods to access (read-only) data and listen for changes.
+var Store = {
+
+    getDate: function() {
+        return _store.get("date");
+    },
+
+    getCurrency: function() {
+        return _store.get("currency");
+    },
+
+    getDesc: function() {
+        return _store.get("desc");
+    },
+
+    // Get expenses for the current date.
+    getExpenses: function() {
+        return _store.get("expenses").forDate(this.getDate());
+    },
+
+    addChangeListener: function(cb) {
+        _store.on("change", cb);
+    },
+
+    removeChangeListener: function(cb) {
+        _store.off("change", cb);
+    }
+};
 
 module.exports = Store;
