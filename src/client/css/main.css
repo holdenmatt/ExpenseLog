@@ -1,0 +1,22 @@
+.App {
+  width: 320px;
+  padding-top: 20px;
+}
+
+.DatePicker {
+  width: 220px;
+  height: 36px;
+  margin: 0 0 10px;
+}
+
+.CurrencyPicker {
+  width: 90px;
+}
+
+.ExpenseRow {
+  padding-bottom: 10px;
+}
+
+.ExpenseInput input {
+  width: 260px !important;
+}
