@@ -4,39 +4,22 @@ var Constants = require("./Constants");
 var Dispatcher = require("./Dispatcher");
 var Expenses = require("./models/Expenses");
 var moment = require("moment");
-var _ = require("underscore");
+
+var TODAY = moment().format("YYYY-MM-DD");
 
 // Define a private store. We use Backbone change events in place of
 // EventEmitter (as in the Flux docs).
 var _store = new Backbone.Model({
-    date: moment(),
+    date: TODAY,
     currency: "THB",
     desc: "Travel day - Chiang Mai to Chiang Rai",
-    expenses: new Expenses()
+    expenses: new Expenses(window.EXPENSES)
 });
 
 // Trigger a change event when expenses changes.
 _store.get("expenses").on("all", function() {
     _store.trigger("change");
 });
-
-function addExpense(tag, amt, desc) {
-    // Use the current date and currency.
-    _store.get("expenses").add({
-        id: _.uniqueId(),
-        date: _store.get("date"),
-        currency: _store.get("currency"),
-        tag: tag,
-        amt: amt,
-        desc: desc,
-        created: Date.now()
-    });
-}
-
-// Test data
-addExpense("Food", 100, "khao soi lunch");
-addExpense("Food", 250, "dinner and beers");
-addExpense("Transport", 1000, "bus to chiang rai");
 
 // Handle actions from the dispatcher; this is the only way data is modified.
 Dispatcher.register(function(payload) {
@@ -64,7 +47,15 @@ Dispatcher.register(function(payload) {
         case Constants.ADD_EXPENSE:
             // Use the current date and currency.
             var exp = action.expense;
-            addExpense(exp.tag, exp.amt, exp.desc);
+            _store.get("expenses").add({
+                id: _.uniqueId(),
+                date: _store.get("date"),
+                currency: _store.get("currency"),
+                tag: exp.tag,
+                amt: exp.amt,
+                desc: exp.desc,
+                created: Date.now()
+            });
             break;
 
         case Constants.DELETE_EXPENSE:

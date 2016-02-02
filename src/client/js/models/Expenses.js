@@ -5,7 +5,6 @@ var Currencies = require("./Currencies");
 var Expense = Backbone.Model.extend({
 
     initialize: function(attrs) {
-        // Replace currency code with a Currency model.
         this.set("currency", Currencies.get(attrs.currency));
     },
 

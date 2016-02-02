@@ -17,6 +17,10 @@
     <script src="build/lib/underscore/underscore-min.js"></script>
     <script src="build/lib/backbone/backbone-min.js"></script>
     <script src="build/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script>
+      window.EXPENSES = {{expenses | safe}};
+    </script>
     <script src="build/bundle.js"></script>
   </body>
 </html>

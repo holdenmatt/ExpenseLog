@@ -12,22 +12,24 @@ var DatePicker = React.createClass({
 
     propTypes: {
         className: React.PropTypes.string,
-        date: React.PropTypes.instanceOf(moment).isRequired
+        date: React.PropTypes.string.isRequired
     },
 
     render: function() {
+        var date = moment(this.props.date);
         var classes = classNames("DatePicker", this.props.className);
         return (
             <ReactDatePicker
                 className={classes}
                 dateFormat={DATE_FORMAT}
-                selected={this.props.date}
+                selected={date}
                 onChange={this.onChange} />
         );
     },
 
     onChange: function(date) {
-        Actions.setDate(date);
+        var dateString = date.format("YYYY-MM-DD");
+        Actions.setDate(dateString);
     }
 });
 

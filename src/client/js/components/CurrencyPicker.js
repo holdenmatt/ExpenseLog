@@ -14,14 +14,13 @@ var CurrencyPicker = React.createClass({
     },
 
     render: function() {
+        var classes = classNames("CurrencyPicker", this.props.className);
         var options = Currencies.map(function(currency) {
             return {
                 value: currency.get("id"),
                 label: currency.getName()
             };
         });
-
-        var classes = classNames("CurrencyPicker", this.props.className);
         return (
             <Select
                 className={classes}
