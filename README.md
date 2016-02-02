@@ -8,14 +8,19 @@ Uses:
 * ReactJS views
 * Flux architecture
 * Bootstrap for component styling
-* Flask for a simple Python REST API
-* PostgreSQL for persistence
-* Browserify to build; Babel for ES2015 + JSX transpilation
+* Python Flask server
+* REST API using Flask-RESTful
+* PostgreSQL + SQLAlchemy for persistence
+* Browserify to build; Bower to install front-end libs
+* Babel for ES2015 + JSX transpilation
 
 
 Install
 =======
+$ virtualenv venv --no-site-packages
+$ source venv/bin/activate
 $ pip install -r requirements.txt
+
 $ npm install
 $ bower install
 
@@ -23,7 +28,6 @@ $ bower install
 TODO
 ====
 - Deploy to heroku.
-- Write server.
 - (Commit good clone here).
 - Make currency sticky.
 - Handle mixed currency totals

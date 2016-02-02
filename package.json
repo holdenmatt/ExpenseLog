@@ -15,7 +15,7 @@
     "watch:css": "catw src/client/css/*.css -o build/bundle.css -v",
     "watch": "npm run watch:js & npm run watch:css",
     "lint": "jshint build/bundle.js",
-    "start": "http-server -p 9090 .",
+    "start": "source venv/bin/activate && python src/server/app.py",
     "clean": "rm -r build/*"
   },
   "dependencies": {
@@ -36,7 +36,6 @@
     "bower": "^1.7.7",
     "browserify": "^13.0.0",
     "catw": "^1.0.1",
-    "http-server": "^0.8.5",
     "jshint": "^2.9.1",
     "watchify": "^3.7.0"
   },
