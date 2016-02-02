@@ -7,8 +7,7 @@ var Expense = Backbone.Model.extend({
     formattedAmt: function() {
         var amt = this.get("amt");
         var currency = this.get("currency");
-        var symbol = Currencies.getSymbol(currency);
-        return `${amt}${symbol}`;
+        return Currencies.format(currency, amt);
     }
 });
 
@@ -29,8 +28,7 @@ var Expenses = Backbone.Collection.extend({
         var totals = _.map(this.groupBy("currency"), function(expenses, currency) {
             var amts = _.map(expenses, (exp) => exp.get("amt"));
             var total = sum(amts);
-            var symbol = Currencies.getSymbol(currency);
-            return `${total}${symbol}`;
+            return Currencies.format(currency, total);
         });
         return totals;
     }
