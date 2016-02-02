@@ -4,10 +4,6 @@ Define the REST API for our app.
 import datetime
 from flask_restful import Resource, Api, reqparse, abort
 
-
-TODAY = datetime.date.today().isoformat()
-NOW = datetime.datetime.now().isoformat()
-
 EXPENSES = {}
 
 def get_expenses():
@@ -20,12 +16,11 @@ def next_id():
     else:
         return 1
 
-def add_expense(tag, currency, amt, desc):
+def add_expense(date, tag, currency, amt, desc):
     id = next_id()
     expense = {
         'id': id,
-        'created': NOW,
-        'date': TODAY,
+        'date': date,
         'tag': tag,
         'currency': currency,
         'amt': amt,
@@ -34,20 +29,21 @@ def add_expense(tag, currency, amt, desc):
     EXPENSES[id] = expense
     return expense
 
-add_expense('Food', 'THB', 100, 'khao soi lunch')
-add_expense('Food', 'THB', 250, 'dinner and beers')
-add_expense('Transport', 'THB', 1000, 'bus to chiang rai')
+add_expense('2016-02-02', 'Food', 'THB', 100, 'khao soi lunch')
+add_expense('2016-02-02', 'Food', 'THB', 250, 'dinner and beers')
+add_expense('2016-02-02', 'Transport', 'THB', 1000, 'bus to chiang rai')
 
 
 def abort_if_expense_doesnt_exist(id):
     if id not in EXPENSES:
         abort(404, message="Expense {} doesn't exist".format(id))
 
-parser = reqparse.RequestParser()
-parser.add_argument('tag', type=str)
-parser.add_argument('currency', type=str)
-parser.add_argument('amt', type=int)
-parser.add_argument('desc', type=str)
+parser = reqparse.RequestParser(bundle_errors=True)
+parser.add_argument('date', type=str, required=True)
+parser.add_argument('tag', type=str, required=True)
+parser.add_argument('currency', type=str, required=True)
+parser.add_argument('amt', type=int, required=True)
+parser.add_argument('desc', type=str, required=True)
 
 """A single expense: fetch or delete."""
 class Expense(Resource):
@@ -67,7 +63,8 @@ class ExpenseList(Resource):
 
     def post(self):
         args = parser.parse_args()
-        expense = add_expense(args['tag'],
+        expense = add_expense(args['date'],
+                              args['tag'],
                               args['currency'],
                               args['amt'],
                               args['desc'])

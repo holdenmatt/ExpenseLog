@@ -49,11 +49,10 @@ Dispatcher.register(function(payload) {
             var exp = action.expense;
             _store.get("expenses").add({
                 date: _store.get("date"),
-                currency: _store.get("currency"),
                 tag: exp.tag,
+                currency: _store.get("currency"),
                 amt: exp.amt,
-                desc: exp.desc,
-                created: Date.now()
+                desc: exp.desc
             }).save();
             break;
 
