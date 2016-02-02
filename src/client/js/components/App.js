@@ -1,3 +1,6 @@
+// Render the app. This component acts as a Flux "Controller-View". It listens
+// for changes in the Store and passes the new data to its children.
+
 var Constants = require("../Constants");
 var CurrencyPicker = require("./CurrencyPicker");
 var DatePicker = require("./DatePicker");
@@ -15,8 +18,6 @@ function getState() {
     }
 }
 
-// This component acts as a Flux "Controller-View". It listens for changes
-// in the Store and passes the new data to its children.
 var App = React.createClass({
 
     getInitialState: function() {

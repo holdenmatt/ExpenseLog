@@ -1,6 +1,5 @@
 // Model/Collection representing expenses.
 
-var Backbone = require("backbone");
 var Currencies = require("./Currencies");
 
 var Expense = Backbone.Model.extend({

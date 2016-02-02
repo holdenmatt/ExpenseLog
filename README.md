@@ -22,9 +22,8 @@ $ bower install
 
 TODO
 ====
-- Fix ids.
-- Use Bower to manage front-end libs (eliminates lib/).
 - Deploy to heroku.
 - Write server.
+- (Commit good clone here).
 - Make currency sticky.
 - Handle mixed currency totals

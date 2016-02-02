@@ -1,8 +1,8 @@
 // The main entry point to render our App to the DOM.
 
-var React = require("react"),
-    ReactDOM = require("react-dom"),
-    App = require("./components/App");
+var App = require("./components/App");
+var React = require("react");
+var ReactDOM = require("react-dom");
 
 ReactDOM.render(
     <App/>,

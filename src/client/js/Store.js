@@ -1,6 +1,5 @@
 // The Store contains the application state and logic for a domain.
 
-var Backbone = require("backbone");
 var Constants = require("./Constants");
 var Dispatcher = require("./Dispatcher");
 var Expenses = require("./models/Expenses");

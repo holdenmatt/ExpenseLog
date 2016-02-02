@@ -3,14 +3,13 @@
 var Actions = require("../Actions");
 var Expenses = require("../models/Expenses");
 var React = require("react");
-var PropTypes = React.PropTypes;
 
 // Display a header/total, list of expenses, and input to add new ones.
 var ExpenseList = React.createClass({
 
     propTypes: {
-        tag: PropTypes.string.isRequired,
-        expenses: PropTypes.instanceOf(Expenses).isRequired
+        tag: React.PropTypes.string.isRequired,
+        expenses: React.PropTypes.instanceOf(Expenses).isRequired
     },
 
     render: function() {
@@ -36,8 +35,8 @@ var ExpenseList = React.createClass({
 var ExpenseHeader = React.createClass({
 
     propTypes: {
-        tag: PropTypes.string.isRequired,
-        expenses: PropTypes.instanceOf(Expenses).isRequired
+        tag: React.PropTypes.string.isRequired,
+        expenses: React.PropTypes.instanceOf(Expenses).isRequired
     },
 
     render: function() {
@@ -56,7 +55,7 @@ var ExpenseHeader = React.createClass({
 var ExpenseRow = React.createClass({
 
     propTypes: {
-        expense: PropTypes.instanceOf(Expenses.Expense).isRequired
+        expense: React.PropTypes.instanceOf(Expenses.Expense).isRequired
     },
 
     render: function() {
@@ -85,7 +84,7 @@ var ExpenseRow = React.createClass({
 var ExpenseInput = React.createClass({
 
     propTypes: {
-        tag: PropTypes.string.isRequired
+        tag: React.PropTypes.string.isRequired
     },
 
     render: function() {

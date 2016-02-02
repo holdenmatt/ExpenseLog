@@ -1,7 +1,5 @@
 // Define the currencies available for expenses.
 
-var Backbone = require("backbone");
-
 var Currency = Backbone.Model.extend({
     getName: function() {
         var code = this.get("id");
