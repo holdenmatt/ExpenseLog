@@ -6,15 +6,19 @@
 .DatePicker {
   width: 220px;
   height: 36px;
-  margin: 0 0 10px;
 }
 
 .CurrencyPicker {
   width: 90px;
 }
 
+.ExpenseHeader h4,
+.ExpenseHeader h5 {
+    margin-top: 20px;
+}
+
 .ExpenseRow {
-  padding-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .ExpenseInput input {

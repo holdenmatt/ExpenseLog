@@ -49,7 +49,7 @@ var App = React.createClass({
 
         return (
             <div className="App">
-                <div className="clearfix">
+                <div className="clearfix form-group">
                     <DatePicker date={this.state.date} className="pull-left" />
                     <CurrencyPicker currency={this.state.currency} className="pull-right" />
                 </div>

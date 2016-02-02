@@ -24,18 +24,21 @@ var Expenses = Backbone.Collection.extend({
         return new Expenses(this.where({tag: tag}));
     },
 
-    formattedTotal: function() {
-        // TODO: deal with mixed currencies.
-        var amts = this.pluck("amt");
-        var total = amts.reduce((a, b) => a + b, 0);
-        if (total > 0) {
-            var currency = this.pluck("currency")[0];
+    // Return formatted totals (by currency) as an array.
+    formattedTotals: function() {
+        var totals = _.map(this.groupBy("currency"), function(expenses, currency) {
+            var amts = _.map(expenses, (exp) => exp.get("amt"));
+            var total = sum(amts);
             var symbol = Currencies.getSymbol(currency);
             return `${total}${symbol}`;
-        }
-        return "";
+        });
+        return totals;
     }
 });
+
+function sum(amts) {
+    return amts.reduce((a, b) => a + b, 0);
+}
 
 Expenses.Expense = Expense;
 module.exports = Expenses;

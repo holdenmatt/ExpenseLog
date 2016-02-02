@@ -30,4 +30,3 @@ TODO
 - Deploy to heroku.
 - (Commit good clone here).
 - Make currency sticky.
-- Handle mixed currency totals

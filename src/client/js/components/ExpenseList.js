@@ -39,13 +39,24 @@ var ExpenseHeader = React.createClass({
         expenses: React.PropTypes.instanceOf(Expenses).isRequired
     },
 
+    totals: function() {
+        var totals = this.props.expenses.formattedTotals();
+        var totalStr = totals.join(" + ");
+
+        var el = totals.length >= 3 ? "h5"
+               : totals.length == 2 ? "h4"
+               : "h3";
+
+        return React.createElement(el, null, totalStr);
+    },
+
     render: function() {
-        var tag = this.props.tag;
-        var expenses = this.props.expenses;
         return (
-            <div className="clearfix">
-                <h3 className="pull-left">{tag}</h3>
-                <h3 className="pull-right">{expenses.formattedTotal()}</h3>
+            <div className="ExpenseHeader clearfix">
+                <h3 className="pull-left">{this.props.tag}</h3>
+                <div className="pull-right">
+                    {this.totals()}
+                </div>
             </div>
         );
     }
