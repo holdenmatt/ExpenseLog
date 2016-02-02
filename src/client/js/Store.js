@@ -48,18 +48,17 @@ Dispatcher.register(function(payload) {
             // Use the current date and currency.
             var exp = action.expense;
             _store.get("expenses").add({
-                id: _.uniqueId(),
                 date: _store.get("date"),
                 currency: _store.get("currency"),
                 tag: exp.tag,
                 amt: exp.amt,
                 desc: exp.desc,
                 created: Date.now()
-            });
+            }).save();
             break;
 
         case Constants.DELETE_EXPENSE:
-            _store.get("expenses").remove(action.id);
+            _store.get("expenses").get(action.id).destroy();
             break;
     }
 

@@ -4,20 +4,17 @@ var Currencies = require("./Currencies");
 
 var Expense = Backbone.Model.extend({
 
-    initialize: function(attrs) {
-        this.set("currency", Currencies.get(attrs.currency));
-    },
-
     formattedAmt: function() {
         var amt = this.get("amt");
-        var symbol = this.get("currency").get("symbol");
+        var currency = this.get("currency");
+        var symbol = Currencies.getSymbol(currency);
         return `${amt}${symbol}`;
     }
 });
 
 var Expenses = Backbone.Collection.extend({
     model: Expense,
-//    url: "/api/expenses"
+    url: "/api/expenses/",
 
     forDate: function(date) {
         return new Expenses(this.where({date: date}));
@@ -33,7 +30,7 @@ var Expenses = Backbone.Collection.extend({
         var total = amts.reduce((a, b) => a + b, 0);
         if (total > 0) {
             var currency = this.pluck("currency")[0];
-            var symbol = currency.get("symbol");
+            var symbol = Currencies.getSymbol(currency);
             return `${total}${symbol}`;
         }
         return "";

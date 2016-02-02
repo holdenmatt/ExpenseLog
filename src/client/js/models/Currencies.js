@@ -9,7 +9,11 @@ var Currency = Backbone.Model.extend({
 });
 
 var Currencies = Backbone.Collection.extend({
-    model: Currency
+    model: Currency,
+
+    getSymbol: function(code) {
+        return this.get(code).get("symbol");
+    }
 });
 
 module.exports = new Currencies([

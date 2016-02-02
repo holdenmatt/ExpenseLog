@@ -29,7 +29,9 @@ var DatePicker = React.createClass({
 
     onChange: function(date) {
         var dateString = date.format("YYYY-MM-DD");
-        Actions.setDate(dateString);
+        if (dateString != this.props.date) {
+            Actions.setDate(dateString);
+        }
     }
 });
 

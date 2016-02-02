@@ -8,6 +8,7 @@ var assign = require("object-assign");
 module.exports = assign(new Dispatcher(), {
 
     handleViewAction: function(action) {
+        console.log("View action: ", action.actionType);
         this.dispatch({
             source: "VIEW_ACTION",
             action: action
@@ -15,6 +16,7 @@ module.exports = assign(new Dispatcher(), {
     },
 
     handleServerAction: function(action) {
+        console.log("Server action: ", action.actionType);
         this.dispatch({
             source: "SERVER_ACTION",
             action: action

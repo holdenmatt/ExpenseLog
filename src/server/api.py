@@ -44,10 +44,10 @@ def abort_if_expense_doesnt_exist(id):
         abort(404, message="Expense {} doesn't exist".format(id))
 
 parser = reqparse.RequestParser()
-parser.add_argument('tag')
-parser.add_argument('currency')
-parser.add_argument('amt')
-parser.add_argument('desc')
+parser.add_argument('tag', type=str)
+parser.add_argument('currency', type=str)
+parser.add_argument('amt', type=int)
+parser.add_argument('desc', type=str)
 
 """A single expense: fetch or delete."""
 class Expense(Resource):
@@ -76,6 +76,6 @@ class ExpenseList(Resource):
 
 def add_api_resources(app):
     api = Api(app)
-    api.add_resource(ExpenseList, '/api/expenses')
+    api.add_resource(ExpenseList, '/api/expenses/')
     api.add_resource(Expense, '/api/expenses/<int:id>')
     return api
