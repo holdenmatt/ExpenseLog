@@ -3,13 +3,11 @@ TravelLog
 
 A simple daily tracker for travel expenses.
 
-Uses:
-* Backbone.js to manage data models/collections, events, and syncing
-* ReactJS views
-* Flux architecture
+Build using:
+* Backbone.js to manage models/collections, events, and syncing
+* ReactJS views + Flux architecture
 * Bootstrap for component styling
-* Python Flask server
-* REST API using Flask-RESTful
+* Python Flask server + REST API using Flask-Restless
 * PostgreSQL + SQLAlchemy for persistence
 * Browserify to build; Bower to install front-end libs
 * Babel for ES2015 + JSX transpilation
@@ -30,3 +28,4 @@ TODO
 - Deploy to heroku.
 - (Commit good clone here).
 - Make currency sticky.
+- Add cupcake.

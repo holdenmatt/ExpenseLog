@@ -19,8 +19,12 @@
     <script src="build/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <script>
-      window.EXPENSES = {{expenses | safe}};
+        function setExpenses(response) {
+            window.EXPENSES = response.data.objects;
+        }
     </script>
+    <script src="/api/expense?callback=setExpenses"></script>
+
     <script src="build/bundle.js"></script>
   </body>
 </html>

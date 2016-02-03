@@ -13,7 +13,7 @@ var Expense = Backbone.Model.extend({
 
 var Expenses = Backbone.Collection.extend({
     model: Expense,
-    url: "/api/expenses/",
+    url: "/api/expense",
 
     forDate: function(date) {
         return new Expenses(this.where({date: date}));
