@@ -3,6 +3,7 @@
 var App = require("./components/App");
 var React = require("react");
 var ReactDOM = require("react-dom");
+var css = require("../css/main.css");
 
 ReactDOM.render(
     <App/>,
