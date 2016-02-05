@@ -27,6 +27,7 @@ var CurrencyPicker = React.createClass({
                 options={options}
                 value={this.props.currency}
                 clearable={false}
+                inputProps={{readOnly: true}}   // Disable keyboard
                 onChange={this.onChange} />
         );
     },
