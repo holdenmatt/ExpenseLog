@@ -1,7 +1,7 @@
 import os
 
 class Config(object):
-    DEBUG = os.environ['DEBUG']
+    DEBUG = os.environ.get('DEBUG', False)
 
     STATIC_FOLDER = '../build'
 
