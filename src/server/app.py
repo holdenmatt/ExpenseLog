@@ -1,12 +1,10 @@
-import os
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask.ext.restless import APIManager
+from config import Config
 
-app = Flask(__name__, static_folder='../../build')
-app.config['DEBUG'] = True
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+app = Flask(__name__, static_folder=Config.STATIC_FOLDER)
+app.config.from_object(Config)
 db = SQLAlchemy(app)
 
 class Expense(db.Model):
