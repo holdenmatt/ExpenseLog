@@ -7,8 +7,8 @@
   "main": "src/client/js/main.js",
   "license": "MIT",
   "scripts": {
-    "build": "browserify src/client/js/main.js -o build/bundle.js",
-    "watch": "watchify src/client/js/main.js -o build/bundle.js",
+    "build": "browserify -d src/client/js/main.js -o build/bundle.js -p [minifyify --map main.js.map --output build/main.js.map]",
+    "watch": "watchify src/client/js/main.js -o build/bundle.js -p [minifyify --map main.js.map --output build/main.js.map]",
     "install:python": "npm run install:venv && npm run install:pip",
     "install:venv": "virtualenv venv --no-site-packages",
     "install:pip": "source venv/bin/activate && pip install -r requirements.txt",
@@ -21,11 +21,12 @@
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
     "babelify": "^7.2.0",
+    "bower": "^1.7.7",
     "browserify": "^13.0.0",
     "browserify-css": "^0.8.4",
-    "bower": "^1.7.7",
     "classnames": "^2.2.3",
     "flux": "^2.1.1",
+    "minifyify": "^7.2.1",
     "moment": "^2.11.1",
     "object-assign": "^4.0.1",
     "react": "^0.14.7",
@@ -37,7 +38,10 @@
     "watchify": "^3.7.0"
   },
   "browserify": {
-    "transform": ["babelify", "browserify-css"]
+    "transform": [
+      "babelify",
+      "browserify-css"
+    ]
   },
   "babel": {
     "presets": [
