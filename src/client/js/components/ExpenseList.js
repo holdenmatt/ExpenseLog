@@ -100,8 +100,8 @@ var ExpenseInput = React.createClass({
 
     render: function() {
         return (
-            <form className="ExpenseInput form-inline" onSubmit={this.onSubmit}>
-                <input type="text" ref="input" className="form-control"
+            <form className="ExpenseInput form-inline clearfix" onSubmit={this.onSubmit}>
+                <input type="text" ref="input" className="form-control pull-left"
                     placeholder="[amount] [description]"/>
                 <button type="submit" className="btn btn-default pull-right" tabIndex="-1">Add</button>
             </form>

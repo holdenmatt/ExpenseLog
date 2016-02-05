@@ -23,6 +23,7 @@ var DatePicker = React.createClass({
                 className={classes}
                 dateFormat={DATE_FORMAT}
                 selected={date}
+                readOnly={true}     // Disable keyboard
                 onChange={this.onChange} />
         );
     },
