@@ -7,12 +7,13 @@ app = Flask(__name__, static_folder=Config.STATIC_FOLDER)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
 
-class Expense(db.Model):
-    # Auto-generated
+class Summary(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    created = db.Column(db.DateTime, server_default=db.func.now())
+    date = db.Column(db.Date, unique=True)
+    summary = db.Column(db.String(1000))
 
-    # Client fields
+class Expense(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date)
     tag = db.Column(db.String(10))
     currency = db.Column(db.String(3))
@@ -22,6 +23,7 @@ class Expense(db.Model):
 db.create_all()
 
 manager = APIManager(app, flask_sqlalchemy_db=db)
+manager.create_api(Summary, methods=['GET', 'POST', 'PUT', 'DELETE'])
 manager.create_api(Expense, methods=['GET', 'POST', 'DELETE'])
 
 @app.route('/')

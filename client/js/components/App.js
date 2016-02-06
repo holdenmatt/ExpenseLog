@@ -4,17 +4,17 @@
 var Constants = require("../Constants");
 var CurrencyPicker = require("./CurrencyPicker");
 var DatePicker = require("./DatePicker");
-var DescriptionInput = require("./DescriptionInput");
 var ExpenseList = require("./ExpenseList");
 var React = require("react");
 var Store = require("../Store");
+var SummaryInput = require("./SummaryInput");
 
 function getState() {
     return {
-        expenses: Store.getExpenses(),
         date: Store.getDate(),
         currency: Store.getCurrency(),
-        desc: Store.getDesc()
+        summary: Store.getSummary(),
+        expenses: Store.getExpenses(),
     }
 }
 
@@ -37,6 +37,7 @@ var App = React.createClass({
     },
 
     render: function() {
+
         var lists = Constants.TAGS.map((tag, index) => {
             var expenses = this.state.expenses.forTag(tag);
             return (
@@ -54,7 +55,8 @@ var App = React.createClass({
                     <CurrencyPicker currency={this.state.currency} className="pull-right" />
                 </div>
 
-                <DescriptionInput value={this.state.desc} />
+                {/* Add a key, so we render a new defaultValue if summary changes. */}
+                <SummaryInput value={this.state.summary} key={this.state.summary} />
 
                 {lists}
             </div>

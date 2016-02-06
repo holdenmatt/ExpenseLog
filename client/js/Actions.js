@@ -20,10 +20,10 @@ var Actions = {
         });
     },
 
-    setDesc: function(desc) {
+    setSummary: function(summary) {
         Dispatcher.handleViewAction({
-            actionType: Constants.SET_DESC,
-            desc: desc
+            actionType: Constants.SET_SUMMARY,
+            summary: summary
         });
     },
 
