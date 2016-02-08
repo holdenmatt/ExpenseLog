@@ -3,6 +3,7 @@
 var Actions = require("../Actions");
 var Expenses = require("../models/Expenses");
 var React = require("react");
+var classNames = require("classnames");
 
 // Display a header/total, list of expenses, and input to add new ones.
 var ExpenseList = React.createClass({
@@ -71,8 +72,11 @@ var ExpenseRow = React.createClass({
 
     render: function() {
         var exp = this.props.expense;
+        var classes = classNames("ExpenseRow", "clearfix", {
+            "isNew": exp.isNew()
+        });
         return (
-            <div className="ExpenseRow clearfix">
+            <div className={classes}>
                 <span className="amt">{exp.formattedAmt()}</span>
                 <span className="desc"> - {exp.get("desc")}</span>
                 <button

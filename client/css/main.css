@@ -24,6 +24,10 @@
     margin-bottom: 10px;
 }
 
+.ExpenseRow.isNew {
+    color: red;
+}
+
 .ExpenseInput input {
   width: 260px !important;
 }
