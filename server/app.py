@@ -5,7 +5,9 @@ from config import Config
 
 app = Flask(__name__, static_folder=Config.STATIC_FOLDER)
 app.config.from_object(Config)
+
 db = app.db = SQLAlchemy(app)
+db.create_all()
 
 class Summary(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -20,11 +22,10 @@ class Expense(db.Model):
     amt = db.Column(db.Integer)
     desc = db.Column(db.String(100))
 
-db.create_all()
-
+page_size = app.config['PAGE_SIZE']
 manager = APIManager(app, flask_sqlalchemy_db=db)
-manager.create_api(Summary, methods=['GET', 'POST', 'PUT', 'DELETE'])
-manager.create_api(Expense, methods=['GET', 'POST', 'DELETE'])
+manager.create_api(Summary, methods=['GET', 'POST', 'PUT', 'DELETE'], results_per_page=page_size)
+manager.create_api(Expense, methods=['GET', 'POST', 'DELETE'], results_per_page=page_size)
 
 @app.route('/')
 def index():
