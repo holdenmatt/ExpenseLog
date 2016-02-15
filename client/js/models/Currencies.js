@@ -2,14 +2,20 @@
 
 // TODO: Replace this with a standard formatting method?
 const POSTFIX = {
+    "MMK": true,
     "THB": true
 };
 
 var Currency = Backbone.Model.extend({
     getName: function() {
-        var code = this.get("id");
-        var symbol = this.get("symbol");
-        return `${code} (${symbol})`;
+        var name = this.get("name");
+        if (name) {
+            return name;
+        } else {
+            var code = this.get("id");
+            var symbol = this.get("symbol");
+            return `${code} (${symbol})`;
+        }
     }
 });
 
@@ -34,5 +40,6 @@ module.exports = new Currencies([
     {id: "USD", symbol: "$"},
     {id: "EUR", symbol: "€"},
     {id: "THB", symbol: "฿"},
+    {id: "MMK", symbol: "K", name: "MMK [khat] (K)"},
     {id: "JPY", symbol: "¥"},
 ]);
