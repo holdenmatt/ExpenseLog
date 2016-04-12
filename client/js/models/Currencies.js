@@ -38,6 +38,7 @@ var Currencies = Backbone.Collection.extend({
 
 module.exports = new Currencies([
     {id: "USD", symbol: "$"},
+    {id: "PEN", symbol: "S/ ", name: "PEN [Soles] (S/)"},
     {id: "EUR", symbol: "€"},
     {id: "THB", symbol: "฿"},
     {id: "MMK", symbol: "K", name: "MMK [khat] (K)"},
