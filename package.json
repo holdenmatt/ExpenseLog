@@ -14,7 +14,7 @@
     "install:pip": "source venv/bin/activate && pip install -r requirements.txt",
     "postinstall": "bower install && npm run build",
     "start": "source venv/bin/activate && heroku local",
-    "test": "DATABASE_URL=postgresql://localhost/ExpenseLogTest nosetests",
+    "test": "source venv/bin/activate && DATABASE_URL=postgresql://localhost/ExpenseLogTest nosetests",
     "clean": "rm -rf build",
     "clean:all": "npm run clean && rm -rf venv && rm -rf node_modules"
   },

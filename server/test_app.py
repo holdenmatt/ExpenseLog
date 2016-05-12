@@ -39,10 +39,10 @@ class AppTests(unittest.TestCase):
         # Create an expense.
         res = self.post_json('/api/expense', data={
             'date': '2016-01-01',
-            'tag': 'Food',
+            'category': 'Groceries',
             'currency': 'USD',
             'amt': 100,
-            'desc': 'dinner and beers'
+            'note': 'dinner and beers'
         })
         eq_(res.status_code, 201)
         content = check_valid_json(res)
