@@ -1,39 +1,34 @@
 // Select a date.
 
-var Actions = require("../Actions");
-var React = require("react");
-var ReactDatePicker = require("react-datepicker");
-var classNames = require("classnames");
-var moment = require("moment");
+import moment from "moment";
+import React, { Component, PropTypes } from "react";
+import ReactDatePicker from "react-datepicker";
+import Actions from "../Actions";
 
-var DATE_FORMAT = "dddd MMM DD, YYYY";
+const DATE_FORMAT = "MMM DD, YYYY";
 
-var DatePicker = React.createClass({
+export default class DatePicker extends Component {
 
-    propTypes: {
-        className: React.PropTypes.string,
-        date: React.PropTypes.string.isRequired
-    },
-
-    render: function() {
+    render() {
         var date = moment(this.props.date);
-        var classes = classNames("DatePicker", this.props.className);
         return (
             <ReactDatePicker
-                className={classes}
+                className="DatePicker input-lg"
                 dateFormat={DATE_FORMAT}
                 selected={date}
-                readOnly={true}     // Disable keyboard
-                onChange={this.onChange} />
+                readOnly={true} // Disable keyboard
+                onChange={this.handleChange.bind(this)} />
         );
-    },
+    }
 
-    onChange: function(date) {
+    handleChange(date) {
         var dateString = date.format("YYYY-MM-DD");
         if (dateString != this.props.date) {
             Actions.setDate(dateString);
         }
     }
-});
+}
 
-module.exports = DatePicker;
+DatePicker.propTypes = {
+    date: PropTypes.string.isRequired
+}

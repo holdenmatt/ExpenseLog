@@ -19,13 +19,8 @@
         function setExpenses(response) {
             window.EXPENSES = response.data.objects;
         }
-        function setSummaries(response) {
-            window.SUMMARIES = response.data.objects;
-        }
     </script>
     <script src="/api/expense?callback=setExpenses"></script>
-    <script src="/api/summary?callback=setSummaries"></script>
-
     <script src="build/bundle.js"></script>
   </body>
 </html>

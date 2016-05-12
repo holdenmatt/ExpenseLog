@@ -1,0 +1,22 @@
+.CategoryGrid ul {
+    margin-top: -3px;
+    padding-left: 0;
+    list-style: none;
+}
+
+.CategoryGrid li {
+    float: left;
+    width: 25%;
+    height: 90px;
+    padding: 10px;
+    font-size: 11px;
+    text-align: center;
+    background-color: #f6f6f6;
+    border: 3px solid #fff;
+    border-radius: 10px;
+}
+
+.CategoryGrid li:hover {
+    color: #fff;
+    background-color: #563d7c;
+}

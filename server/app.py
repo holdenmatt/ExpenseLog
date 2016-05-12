@@ -7,24 +7,19 @@ app = Flask(__name__, static_folder=Config.STATIC_FOLDER)
 app.config.from_object(Config)
 
 db = app.db = SQLAlchemy(app)
-db.create_all()
-
-class Summary(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.Date, unique=True)
-    summary = db.Column(db.String(1000))
 
 class Expense(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date)
-    tag = db.Column(db.String(10))
-    currency = db.Column(db.String(3))
+    category = db.Column(db.String(20))
     amt = db.Column(db.Integer)
-    desc = db.Column(db.String(100))
+    currency = db.Column(db.String(3))
+    note = db.Column(db.String(100))
+
+db.create_all()
 
 page_size = app.config['PAGE_SIZE']
 manager = APIManager(app, flask_sqlalchemy_db=db)
-manager.create_api(Summary, methods=['GET', 'POST', 'PUT', 'DELETE'], results_per_page=page_size)
 manager.create_api(Expense, methods=['GET', 'POST', 'DELETE'], results_per_page=page_size)
 
 @app.route('/')

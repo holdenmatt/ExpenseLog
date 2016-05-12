@@ -12,7 +12,6 @@ Built using:
 * Babel for ES2015 + JSX transpilation
 
 
-
 ### Install
 
 First install:
@@ -29,9 +28,7 @@ $ npm run install:python
 ```
 
 
-
 ### Run locally
-
 ```sh
 $ createdb TravelLog
 $ npm start
@@ -39,9 +36,13 @@ $ npm start
 Then open [http://localhost:5000](http://localhost:5000).
 
 
+### Watch changes
+```sh
+$ npm run watch
+```
+
 
 ### Run tests
-
 ```sh
 $ createdb TravelLogTest
 $ npm test

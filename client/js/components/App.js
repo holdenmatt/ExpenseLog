@@ -1,67 +1,76 @@
 // Render the app. This component acts as a Flux "Controller-View". It listens
-// for changes in the Store and passes the new data to its children.
+// for changes in the Store and passes the new data to its children as props.
 
-var Constants = require("../Constants");
-var CurrencyPicker = require("./CurrencyPicker");
-var DatePicker = require("./DatePicker");
-var ExpenseList = require("./ExpenseList");
-var React = require("react");
-var Store = require("../Store");
-var SummaryInput = require("./SummaryInput");
+import React, { Component } from "react";
+import moment from "moment";
+import Actions from "../Actions";
+import AmountInput from "./AmountInput";
+import CategoryGrid from "./CategoryGrid";
+import Constants from "../Constants";
+import DatePicker from "./DatePicker";
+import Store from "../Store";
+
+// Hard-code currency for now.
+const CURRENCY = "USD";
 
 function getState() {
     return {
-        date: Store.getDate(),
-        currency: Store.getCurrency(),
-        summary: Store.getSummary(),
-        expenses: Store.getExpenses(),
+        date: Store.getDate()
     }
 }
 
-var App = React.createClass({
+export default class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = getState();
+        _.bindAll(this, "handleChange", "handleCategoryClick");
+    }
 
-    getInitialState: function() {
-        return getState();
-    },
+    componentDidMount() {
+        Store.addChangeListener(this.handleChange);
+    }
+    componentWillUnmount() {
+        Store.removeChangeListener(this.handleChange);
+    }
 
-    componentDidMount: function() {
-        Store.addChangeListener(this.onChange);
-    },
-
-    componentWillUnmount: function() {
-        Store.removeChangeListener(this.onChange);
-    },
-
-    onChange: function() {
-        this.setState(getState());
-    },
-
-    render: function() {
-
-        var lists = Constants.TAGS.map((tag, index) => {
-            var expenses = this.state.expenses.forTag(tag);
-            return (
-                <ExpenseList
-                    tag={tag}
-                    expenses={expenses}
-                    key={index} />
-            );
-        });
-
+    render() {
+        var newCategories = Store.getNewCategories()
         return (
-            <div className="App">
-                <div className="clearfix form-group">
-                    <DatePicker date={this.state.date} className="pull-left" />
-                    <CurrencyPicker currency={this.state.currency} className="pull-right" />
+            <form className="App">
+                <div className="form-group">
+                    <AmountInput symbol="$" />
+                    <DatePicker date={this.state.date} />
+                    <input type="text" className="NoteInput form-control input-lg" placeholder="Note (optional)" />
                 </div>
-
-                {/* Add a key, so we render a new defaultValue if summary changes. */}
-                <SummaryInput value={this.state.summary} key={this.state.summary} />
-
-                {lists}
-            </div>
+                <CategoryGrid
+                    className="clearfix"
+                    categories={Constants.CATEGORIES}
+                    newCategories={newCategories}
+                    onClick={this.handleCategoryClick} />
+            </form>
         );
     }
-});
 
-module.exports = App;
+    handleChange() {
+        this.setState(getState());
+    }
+
+    handleCategoryClick(index, category) {
+        var cents = $(".AmountInput input").val();
+        if (cents > 0) {
+            var date = Store.getDate();
+            var amt = cents * 100;
+            var note = $(".NoteInput").val();
+
+            Actions.addExpense({
+                date: date,
+                category: category,
+                amt: amt,
+                currency: CURRENCY,
+                note: note,
+            });
+
+            $(".AmountInput input").val(null);
+        }
+    }
+}

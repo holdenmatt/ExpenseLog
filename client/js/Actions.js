@@ -1,31 +1,10 @@
-// Actions are dispatched (e.g. by a view) to the Stores, and
-// include a payload of data.
+// Actions are dispatched (e.g. by a view) to the Stores,
+// and include a payload of data.
 
-var Dispatcher = require("./Dispatcher");
-var Constants = require("./Constants");
+import Constants from "./Constants";
+import Dispatcher from "./Dispatcher";
 
-var Actions = {
-
-    setDate: function(date) {
-        Dispatcher.handleViewAction({
-            actionType: Constants.SET_DATE,
-            date: date
-        });
-    },
-
-    setCurrency: function(currency) {
-        Dispatcher.handleViewAction({
-            actionType: Constants.SET_CURRENCY,
-            currency: currency
-        });
-    },
-
-    setSummary: function(summary) {
-        Dispatcher.handleViewAction({
-            actionType: Constants.SET_SUMMARY,
-            summary: summary
-        });
-    },
+module.exports = {
 
     addExpense: function(expense) {
         Dispatcher.handleViewAction({
@@ -39,7 +18,12 @@ var Actions = {
             actionType: Constants.DELETE_EXPENSE,
             id: id
         });
-    }
-};
+    },
 
-module.exports = Actions;
+    setDate: function(date) {
+        Dispatcher.handleViewAction({
+            actionType: Constants.SET_DATE,
+            date: date
+        });
+    }
+}

@@ -31,9 +31,9 @@
     "moment": "^2.11.1",
     "object-assign": "^4.0.1",
     "react": "^0.14.7",
+    "react-currency-masked-input": "^1.0.1",
     "react-datepicker": "^0.19.0",
-    "react-dom": "^0.14.7",
-    "react-select": "^0.9.1"
+    "react-dom": "^0.14.7"
   },
   "devDependencies": {
     "watchify": "^3.7.0"

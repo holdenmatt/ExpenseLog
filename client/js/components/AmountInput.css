@@ -1,0 +1,28 @@
+.AmountInput {
+    position: relative;
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.AmountInput span {
+    position: absolute;
+    transform: translate(0, -50%);
+    top: 50%;
+    pointer-events: none;
+    margin-left: 0.5em;
+}
+
+.AmountInput input {
+    font-size: 28px;
+    text-indent: 1em;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input:focus::-webkit-input-placeholder {
+    opacity: 0;
+}
