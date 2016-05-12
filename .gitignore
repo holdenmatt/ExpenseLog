@@ -1,6 +1,5 @@
 build/
 node_modules/
 venv/
-TravelLog.db
 *.pyc
 .DS_Store

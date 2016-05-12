@@ -1,4 +1,4 @@
-# TravelLog
+# ExpenseLog
 
 A simple daily tracker for travel expenses.
 
@@ -30,7 +30,7 @@ $ npm run install:python
 
 ### Run locally
 ```sh
-$ createdb TravelLog
+$ createdb ExpenseLog
 $ npm start
 ```
 Then open [http://localhost:5000](http://localhost:5000).
@@ -44,7 +44,7 @@ $ npm run watch
 
 ### Run tests
 ```sh
-$ createdb TravelLogTest
+$ createdb ExpenseLogTest
 $ npm test
 ```
 

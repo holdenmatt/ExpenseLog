@@ -1,9 +1,9 @@
 {
-  "name": "TravelLog",
+  "name": "ExpenseLog",
   "version": "0.0.1",
   "description": "A simple React app to track daily travel expenses",
   "author": "Matt Holden",
-  "repository": "https://github.com/holdenmatt/TravelLog",
+  "repository": "https://github.com/holdenmatt/ExpenseLog",
   "main": "client/main.js",
   "license": "MIT",
   "scripts": {
@@ -14,7 +14,7 @@
     "install:pip": "source venv/bin/activate && pip install -r requirements.txt",
     "postinstall": "bower install && npm run build",
     "start": "source venv/bin/activate && heroku local",
-    "test": "DATABASE_URL=postgresql://localhost/TravelLogTest nosetests",
+    "test": "DATABASE_URL=postgresql://localhost/ExpenseLogTest nosetests",
     "clean": "rm -rf build",
     "clean:all": "npm run clean && rm -rf venv && rm -rf node_modules"
   },
