@@ -9,7 +9,7 @@ module.exports = {
     CATEGORIES: [
         ["Dining out", "cutlery"],
         ["Groceries", "apple"],
-        ["Gas", "filter"],
+        ["Gas", "tint"],
         ["Transport", "road"],
         ["Vacation", "plane"],
         ["Household Supplies", "home"],
