@@ -23,27 +23,31 @@ export default class App extends Component {
     constructor(props) {
         super(props);
         this.state = getState();
-        _.bindAll(this, "handleChange", "handleCategoryClick");
+        _.bindAll(this, "handleCategoryClick", "handleStoreChange");
     }
 
     componentDidMount() {
-        Store.addChangeListener(this.handleChange);
+        Store.addChangeListener(this.handleStoreChange);
     }
     componentWillUnmount() {
-        Store.removeChangeListener(this.handleChange);
+        Store.removeChangeListener(this.handleStoreChange);
     }
 
     render() {
-        var newCategories = Store.getNewCategories()
+        var newCategories = Store.getNewCategories();
         return (
             <form className="App">
                 <div className="form-group">
-                    <AmountInput symbol="$" />
+                    <AmountInput
+                        symbol="$"
+                        ref="AmountInput" />
                     <DatePicker date={this.state.date} />
-                    <input type="text" className="NoteInput form-control input-lg" placeholder="Note (optional)" />
+                    <input
+                        type="text"
+                        className="NoteInput form-control input-lg"
+                        placeholder="Note (optional)" />
                 </div>
                 <CategoryGrid
-                    className="clearfix"
                     categories={Constants.CATEGORIES}
                     newCategories={newCategories}
                     onClick={this.handleCategoryClick} />
@@ -51,15 +55,11 @@ export default class App extends Component {
         );
     }
 
-    handleChange() {
-        this.setState(getState());
-    }
-
     handleCategoryClick(index, category) {
-        var cents = $(".AmountInput input").val();
-        if (cents > 0) {
+        var amtInput = this.refs.AmountInput;
+        var amt = amtInput.getCents();
+        if (amt > 0) {
             var date = Store.getDate();
-            var amt = cents * 100;
             var note = $(".NoteInput").val();
 
             Actions.addExpense({
@@ -70,7 +70,13 @@ export default class App extends Component {
                 note: note,
             });
 
-            $(".AmountInput input").val(null);
+            amtInput.setCents(0);
+        } else {
+            // Do something.
         }
+    }
+
+    handleStoreChange() {
+        this.setState(getState());
     }
 }
