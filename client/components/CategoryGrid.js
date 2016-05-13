@@ -1,7 +1,7 @@
 // Display a grid of category buttons to submit an expense.
 
 import React, { Component, PropTypes } from "react";
-import Icon from "./Icon";
+import Icon from "../common/Icon";
 import css from "./CategoryGrid.css";
 
 export default class CategoryGrid extends Component {

@@ -23,7 +23,6 @@ export default class Icon extends Component {
         )
     }
 }
-
 Icon.propTypes = {
     name: PropTypes.string.isRequired,
     label: PropTypes.string
