@@ -11,7 +11,10 @@ var _Store = Backbone.Model.extend({
 
     defaults: {
         // Use current date.
-        date: moment().format("YYYY-MM-DD")
+        date: moment().format("YYYY-MM-DD"),
+
+        // Load JSON expenses from the server.
+        expenses: new Expenses(window.EXPENSES)
     },
 
     initialize: function() {
@@ -47,9 +50,7 @@ var _Store = Backbone.Model.extend({
     }
 });
 
-var _store = new _Store({
-    expenses: new Expenses(window.EXPENSES)
-});
+const _store = new _Store();
 
 // Define public methods to access (read-only) data and listen for changes.
 var Store = {
