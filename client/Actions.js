@@ -7,6 +7,7 @@ import Dispatcher from "./Dispatcher";
 module.exports = {
 
     addExpense: function(expense) {
+        console.log(expense)
         Dispatcher.handleViewAction({
             actionType: Constants.ADD_EXPENSE,
             expense: expense
@@ -17,13 +18,6 @@ module.exports = {
         Dispatcher.handleViewAction({
             actionType: Constants.DELETE_EXPENSE,
             id: id
-        });
-    },
-
-    setDate: function(date) {
-        Dispatcher.handleViewAction({
-            actionType: Constants.SET_DATE,
-            date: date
         });
     }
 }

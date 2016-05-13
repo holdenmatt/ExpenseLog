@@ -34,6 +34,5 @@ export default class CategoryGrid extends Component {
 CategoryGrid.propTypes = {
     categories: PropTypes.arrayOf(PropTypes.array).isRequired,
     newCategories: PropTypes.arrayOf(PropTypes.string).isRequired,
-    className: PropTypes.string,
     onClick: PropTypes.func
 }

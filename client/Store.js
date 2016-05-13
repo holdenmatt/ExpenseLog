@@ -1,6 +1,5 @@
 // The Store contains the application state and logic for a domain.
 
-import moment from "moment";
 import Constants from "./Constants";
 import Dispatcher from "./Dispatcher";
 import Expenses from "./models/Expenses";
@@ -10,9 +9,6 @@ import Expenses from "./models/Expenses";
 var _Store = Backbone.Model.extend({
 
     defaults: {
-        // Use current date.
-        date: moment().format("YYYY-MM-DD"),
-
         // Load JSON expenses from the server.
         expenses: new Expenses(window.EXPENSES)
     },
@@ -29,13 +25,6 @@ var _Store = Backbone.Model.extend({
         var action = payload.action;
 
         switch(action.actionType) {
-
-            case Constants.SET_DATE:
-                this.set({
-                    date: action.date
-                });
-                break;
-
             case Constants.ADD_EXPENSE:
                 this.get("expenses").add(action.expense).save();
                 break;
@@ -54,8 +43,6 @@ const _store = new _Store();
 
 // Define public methods to access (read-only) data and listen for changes.
 var Store = {
-    getDate: () => _store.get("date"),
-
     // Return categories with new (unsaved) expenses.
     getNewCategories: () => _store.get("expenses").getNewCategories(),
 

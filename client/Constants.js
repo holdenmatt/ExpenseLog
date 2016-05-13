@@ -2,7 +2,6 @@
 
 module.exports = {
 
-    SET_DATE:       "SET_DATE",
     ADD_EXPENSE:    "ADD_EXPENSE",
     DELETE_EXPENSE: "DELETE_EXPENSE",
 

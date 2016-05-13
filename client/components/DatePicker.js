@@ -5,30 +5,36 @@ import React, { Component, PropTypes } from "react";
 import ReactDatePicker from "react-datepicker";
 import Actions from "../Actions";
 
-const DATE_FORMAT = "MMM DD, YYYY";
+const DISPLAY_FORMAT = "MMM DD, YYYY";
 
 export default class DatePicker extends Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            // Start with current date.
+            date: moment()
+        }
+    }
+
+    getDate() {
+        return this.state.date.format("YYYY-MM-DD")
+    }
+
     render() {
-        var date = moment(this.props.date);
         return (
             <ReactDatePicker
                 className="DatePicker input-lg"
-                dateFormat={DATE_FORMAT}
-                selected={date}
+                dateFormat={DISPLAY_FORMAT}
+                selected={this.state.date}
                 readOnly={true} // Disable keyboard
                 onChange={this.handleChange.bind(this)} />
         );
     }
 
     handleChange(date) {
-        var dateString = date.format("YYYY-MM-DD");
-        if (dateString != this.props.date) {
-            Actions.setDate(dateString);
-        }
+        this.setState({
+            date: date
+        });
     }
-}
-
-DatePicker.propTypes = {
-    date: PropTypes.string.isRequired
 }
