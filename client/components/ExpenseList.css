@@ -1,0 +1,18 @@
+.ExpenseRow {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.ExpenseRow .list-group-item-heading,
+.ExpenseRow .list-group-item-text {
+    margin: 5px;
+}
+
+.ExpenseRow .note {
+    clear: both;
+}
+
+.ExpenseRow .close {
+    margin: 1px;
+    margin-left: 5px;
+}

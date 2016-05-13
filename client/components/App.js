@@ -7,10 +7,8 @@ import AmountInput from "./AmountInput";
 import CategoryGrid from "./CategoryGrid";
 import Constants from "../Constants";
 import DatePicker from "./DatePicker";
+import ExpenseList from "./ExpenseList";
 import Store from "../Store";
-
-// Hard-code currency for now.
-const CURRENCY = "USD";
 
 export default class App extends Component {
     constructor(props) {
@@ -26,23 +24,28 @@ export default class App extends Component {
     }
 
     render() {
-        var newCategories = Store.getNewCategories();
+        var expenses = Store.getExpenses();
+        var newCategories = expenses.getNewCategories();
         return (
-            <form className="App">
-                <div className="form-group">
-                    <AmountInput ref="AmountInput" symbol="$" />
-                    <DatePicker ref="DatePicker" />
-                    <input
-                        ref="NoteInput"
-                        type="text"
-                        className="NoteInput form-control input-lg"
-                        placeholder="Note (optional)" />
-                </div>
-                <CategoryGrid
-                    categories={Constants.CATEGORIES}
-                    newCategories={newCategories}
-                    onClick={this.handleCategoryClick} />
-            </form>
+            <div className="App">
+                <form>
+                    <div className="form-group">
+                        <AmountInput ref="AmountInput" symbol="$" />
+                        <DatePicker ref="DatePicker" />
+                        <input
+                            ref="NoteInput"
+                            type="text"
+                            className="NoteInput form-control input-lg"
+                            placeholder="Note (optional)" />
+                    </div>
+                    <CategoryGrid
+                        categories={Constants.CATEGORIES}
+                        newCategories={newCategories}
+                        onClick={this.handleCategoryClick} />
+                </form>
+
+                <ExpenseList expenses={expenses} />
+            </div>
         );
     }
 
@@ -55,7 +58,6 @@ export default class App extends Component {
                 date: date,
                 category: category,
                 amt: amt,
-                currency: CURRENCY,
                 note: note,
             });
 
@@ -67,6 +69,6 @@ export default class App extends Component {
     }
 
     handleStoreChange() {
-        // this.setState(getState());
+        this.setState({});
     }
 }

@@ -26,7 +26,7 @@ var _Store = Backbone.Model.extend({
 
         switch(action.actionType) {
             case Constants.ADD_EXPENSE:
-                this.get("expenses").add(action.expense).save();
+                this.get("expenses").addExpense(action.expense).save();
                 break;
 
             case Constants.DELETE_EXPENSE:
@@ -43,8 +43,7 @@ const _store = new _Store();
 
 // Define public methods to access (read-only) data and listen for changes.
 var Store = {
-    // Return categories with new (unsaved) expenses.
-    getNewCategories: () => _store.get("expenses").getNewCategories(),
+    getExpenses: () => _store.get("expenses"),
 
     addChangeListener:    (cb) => _store.on("change", cb),
     removeChangeListener: (cb) => _store.off("change", cb)

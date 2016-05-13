@@ -1,7 +1,6 @@
 // Render an icon.
 
 import React, { Component, PropTypes } from "react";
-import classNames from "classnames";
 import css from "./Icon.css";
 
 export default class Icon extends Component {

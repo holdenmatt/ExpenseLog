@@ -1,5 +1,6 @@
-.CategoryGrid ul {
+ul.CategoryGrid {
     margin-top: -3px;
+    margin-bottom: 15px;
     padding-left: 0;
     list-style: none;
 }

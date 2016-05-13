@@ -19,9 +19,9 @@ export default class CategoryGrid extends Component {
         });
 
         return (
-            <div className="CategoryGrid">
-                <ul>{items}</ul>
-            </div>
+            <ul className="CategoryGrid clearfix">
+                {items}
+            </ul>
         );
     }
 
