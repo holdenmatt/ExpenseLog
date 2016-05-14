@@ -33,7 +33,8 @@
     "react": "^0.14.7",
     "react-currency-masked-input": "^1.0.1",
     "react-datepicker": "^0.19.0",
-    "react-dom": "^0.14.7"
+    "react-dom": "^0.14.7",
+    "react-motion": "^0.4.3"
   },
   "devDependencies": {
     "watchify": "^3.7.0"

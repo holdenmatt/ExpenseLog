@@ -5,22 +5,21 @@ import React, { Component } from "react";
 import Actions from "../Actions";
 import AmountInput from "./AmountInput";
 import CategoryGrid from "./CategoryGrid";
-import Constants from "../Constants";
 import DatePicker from "./DatePicker";
 import ExpenseList from "./ExpenseList";
 import Store from "../Store";
 
 export default class App extends Component {
-    constructor(props) {
-        super(props);
-        _.bindAll(this, "handleCategoryClick", "handleStoreChange");
-    }
 
     componentDidMount() {
-        Store.addChangeListener(this.handleStoreChange);
+        Store.addChangeListener(this.handleChange.bind(this));
     }
     componentWillUnmount() {
-        Store.removeChangeListener(this.handleStoreChange);
+        Store.removeChangeListener(this.handleChange);
+    }
+
+    handleChange() {
+        this.setState({});
     }
 
     render() {
@@ -39,9 +38,8 @@ export default class App extends Component {
                             placeholder="Note (optional)" />
                     </div>
                     <CategoryGrid
-                        categories={Constants.CATEGORIES}
                         newCategories={newCategories}
-                        onClick={this.handleCategoryClick} />
+                        onClick={this.handleCategoryClick.bind(this)} />
                 </form>
 
                 <ExpenseList expenses={expenses} />
@@ -66,9 +64,5 @@ export default class App extends Component {
         } else {
             // Do something.
         }
-    }
-
-    handleStoreChange() {
-        this.setState({});
     }
 }

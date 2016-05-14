@@ -1,13 +1,15 @@
 // Display a grid of category buttons to submit an expense.
 
-import React, { Component, PropTypes } from "react";
+import Constants from "../Constants";
 import Icon from "../common/Icon";
+import React, { Component, PropTypes } from "react";
+import Store from "../Store";
 import css from "./CategoryGrid.css";
 
 export default class CategoryGrid extends Component {
 
     render() {
-        var items = this.props.categories.map((category, index) => {
+        var items = Constants.CATEGORIES.map((category, index) => {
             var label = category[0];
             var loading = _.contains(this.props.newCategories, label);
             var name = loading ? "loading" : category[1];
@@ -26,13 +28,12 @@ export default class CategoryGrid extends Component {
     }
 
     handleClick(index) {
-        var category = this.props.categories[index][0];
+        var category = Constants.CATEGORIES[index][0];
         this.props.onClick(index, category);
     }
 }
 
 CategoryGrid.propTypes = {
-    categories: PropTypes.arrayOf(PropTypes.array).isRequired,
     newCategories: PropTypes.arrayOf(PropTypes.string).isRequired,
     onClick: PropTypes.func
 }
