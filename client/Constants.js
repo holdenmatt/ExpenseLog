@@ -6,14 +6,41 @@ module.exports = {
     DELETE_EXPENSE: "DELETE_EXPENSE",
 
     CATEGORIES: [
-        ["Dining out", "cutlery"],
-        ["Groceries", "apple"],
-        ["Gas", "tint"],
-        ["Transport", "road"],
-        ["Vacation", "plane"],
-        ["Household Supplies", "home"],
-        ["Shopping", "shopping-cart"],
-        ["Work Expense", "briefcase"],
-        ["Other", "option-horizontal"]
+        {
+            name: "Dining out",
+            icon: "cutlery"
+        },
+        {
+            name: "Groceries",
+            icon: "apple"
+        },
+        {
+            name: "Gas",
+            icon: "tint"
+        },
+        {
+            name: "Transport",
+            icon: "road"
+        },
+        {
+            name: "Vacation",
+            icon: "plane"
+        },
+        {
+            name: "Household Supplies",
+            icon: "home"
+        },
+        {
+            name: "Shopping",
+            icon: "shopping-cart"
+        },
+        {
+            name: "Work Expense",
+            icon: "briefcase"
+        },
+        {
+            name: "Other",
+            icon: "option-horizontal"
+        }
     ]
 }

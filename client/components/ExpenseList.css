@@ -9,14 +9,11 @@
     margin: 15px 5px;
 }
 
-.ExpenseRow .list-group-item-heading {
-    font-weight: bold;
-}
-
 .ExpenseRow .close {
     margin: 11px 5px;
 }
 
 .ExpenseRow .note {
     clear: both;
+    font-style: italic;
 }

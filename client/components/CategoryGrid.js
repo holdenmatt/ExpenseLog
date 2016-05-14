@@ -9,13 +9,12 @@ import css from "./CategoryGrid.css";
 export default class CategoryGrid extends Component {
 
     render() {
-        var items = Constants.CATEGORIES.map((category, index) => {
-            var label = category[0];
-            var loading = _.contains(this.props.newCategories, label);
-            var name = loading ? "loading" : category[1];
+        var items = Constants.CATEGORIES.map(({name, icon}, index) => {
+            var loading = _.contains(this.props.newCategories, name);
+            icon = loading ? "loading" : icon;
             return (
                 <li key={index} onClick={this.handleClick.bind(this, index)}>
-                    <Icon name={name} label={label} />
+                    <Icon name={icon} label={name} />
                 </li>
             );
         });
@@ -28,7 +27,7 @@ export default class CategoryGrid extends Component {
     }
 
     handleClick(index) {
-        var category = Constants.CATEGORIES[index][0];
+        var category = Constants.CATEGORIES[index].name;
         this.props.onClick(index, category);
     }
 }
