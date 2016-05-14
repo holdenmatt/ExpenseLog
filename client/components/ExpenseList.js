@@ -19,7 +19,7 @@ export default class ExpenseList extends Component {
         return this.getExpenses().map(exp => ({
             key: String(exp.cid),
             data: exp,
-            style: {height: 0, opacity: 1}
+            style: {maxHeight: 0, opacity: 1}
         }));
     }
 
@@ -28,18 +28,18 @@ export default class ExpenseList extends Component {
             key: String(exp.cid),
             data: exp,
             style: {
-                height: spring(50, presets.gentle),
+                maxHeight: spring(85, presets.gentle),
                 opacity: spring(1, presets.gentle),
             }
         }));
     }
 
     willEnter() {
-        return {height: 0, opacity: 1};
+        return {maxHeight: 0, opacity: 1};
     }
 
     willLeave() {
-        return {height: spring(0), opacity: spring(0)};
+        return {maxHeight: spring(0), opacity: spring(0)};
     }
 
     render() {

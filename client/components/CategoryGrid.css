@@ -16,8 +16,3 @@ ul.CategoryGrid {
     border: 3px solid #fff;
     border-radius: 10px;
 }
-
-.CategoryGrid li:hover {
-    color: #fff;
-    background-color: #563d7c;
-}
