@@ -25,6 +25,8 @@ export default class DatePicker extends Component {
         return (
             <ReactDatePicker
                 className="DatePicker input-lg"
+                popoverAttachment='top right'
+                popoverTargetAttachment='bottom right'
                 dateFormat={DISPLAY_FORMAT}
                 selected={this.state.date}
                 readOnly={true} // Disable keyboard
