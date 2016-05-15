@@ -7,12 +7,20 @@ module.exports = {
 
     CATEGORIES: [
         {
-            name: "Dining out",
+            name: "Groceries",
+            icon: "apple"
+        },
+        {
+            name: "Eating out",
             icon: "cutlery"
         },
         {
-            name: "Groceries",
-            icon: "apple"
+            name: "Coffee",
+            icon: "leaf"
+        },
+        {
+            name: "Drinks",
+            icon: "glass"
         },
         {
             name: "Gas",
@@ -27,12 +35,16 @@ module.exports = {
             icon: "plane"
         },
         {
-            name: "Household Supplies",
+            name: "Household Goods",
             icon: "home"
         },
         {
             name: "Shopping",
             icon: "shopping-cart"
+        },
+        {
+            name: "Activity",
+            icon: "music"
         },
         {
             name: "Work Expense",
