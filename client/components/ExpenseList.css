@@ -1,26 +1,29 @@
 .ExpenseRow {
     overflow: auto;
-    padding: 0 10px 0 10px;
     margin-top: -2px;
-}
-
-.ExpenseRow .date {
-    margin: 0;
-    padding: 10px 5px;
-    width: 100%;
-    border-bottom: 1px solid #ccc;
+    padding: 0;
 }
 
 .ExpenseRow .list-group-item-heading,
 .ExpenseRow .list-group-item-text {
-    margin: 15px 5px;
+    margin: 10px;
+}
+
+.ExpenseRow .date {
+    margin: 0;
+    padding: 10px 10px;
+    width: 100%;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    background-color: #eee;
 }
 
 .ExpenseRow .close {
-    margin: 11px 5px;
+    margin: 7px 10px 0 0;
 }
 
 .ExpenseRow .note {
+    margin-left: 20px;
     clear: both;
     font-style: italic;
 }

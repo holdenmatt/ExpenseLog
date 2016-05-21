@@ -45,7 +45,7 @@ export default class ExpenseList extends Component {
             key: String(exp.cid),
             data: exp,
             style: {
-                maxHeight: spring(111, presets.gentle),
+                maxHeight: spring(106, presets.gentle),
                 opacity: spring(1, presets.gentle),
             }
         }));
