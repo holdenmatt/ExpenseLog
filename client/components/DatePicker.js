@@ -1,11 +1,11 @@
 // Select a date.
 
-import moment from "moment";
+import Actions from "../Actions";
+import Constants from "../Constants";
 import React, { Component, PropTypes } from "react";
 import ReactDatePicker from "react-datepicker";
-import Actions from "../Actions";
+import moment from "moment";
 
-const DISPLAY_FORMAT = "MMM DD, YYYY";
 
 export default class DatePicker extends Component {
 
@@ -27,7 +27,7 @@ export default class DatePicker extends Component {
                 className="DatePicker input-lg"
                 popoverAttachment='top right'
                 popoverTargetAttachment='bottom right'
-                dateFormat={DISPLAY_FORMAT}
+                dateFormat={Constants.DATE_FORMAT}
                 selected={this.state.date}
                 readOnly={true} // Disable keyboard
                 onChange={this.handleChange.bind(this)} />

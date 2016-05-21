@@ -1,18 +1,35 @@
 // Render a list of most recent expenses.
 
 import Actions from "../Actions";
+import Constants from "../Constants";
 import Expenses from "../models/Expenses";
 import React, { Component, PropTypes } from "react";
 import Store from "../Store";
 import {TransitionMotion, presets, spring} from "react-motion";
 import css from "./ExpenseList.css";
+import moment from "moment";
 
 export default class ExpenseList extends Component {
 
     getExpenses() {
-        return this.props.expenses
-            .sortBy("date").reverse()
+        var expenses = this.props.expenses
+            .sortBy("date")
+            .reverse()
             .filter(exp => !exp.isNew());
+
+        // Add a newDate attribute for the first expense with each date.
+        var prevDate = null;
+        expenses.forEach(exp => {
+            var date = exp.get("date");
+            if (date != prevDate) {
+                prevDate = date;
+                exp.newDate = date;
+            } else {
+                exp.newDate = null;
+            }
+        });
+
+        return expenses;
     }
 
     getDefaultStyles() {
@@ -28,7 +45,7 @@ export default class ExpenseList extends Component {
             key: String(exp.cid),
             data: exp,
             style: {
-                maxHeight: spring(85, presets.gentle),
+                maxHeight: spring(111, presets.gentle),
                 opacity: spring(1, presets.gentle),
             }
         }));
@@ -71,15 +88,21 @@ class ExpenseRow extends Component {
         var amt = exp.formattedAmt();
         var category = exp.get("category");
         var note = exp.get("note");
+        if (exp.newDate != null) {
+            var date = moment(exp.newDate).format(Constants.DATE_FORMAT);
+            var dateHeader = <h5 className="date">{date}</h5>;
+        }
         return (
             <li className="ExpenseRow list-group-item clearfix" style={this.props.style}>
+                {dateHeader}
+
                 <button
                     className="close pull-right"
                     onClick={this.onDeleteClick.bind(this)}>&times;</button>
 
                 <div className="amt list-group-item-text pull-right">{amt}</div>
 
-                <h5 className="category list-group-item-heading pull-left">{category}</h5>
+                <div className="category list-group-item-heading pull-left">{category}</div>
                 <div className="note list-group-item-text">{note}</div>
             </li>
         )

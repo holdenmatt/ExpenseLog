@@ -4,6 +4,13 @@
     margin-top: -2px;
 }
 
+.ExpenseRow .date {
+    margin: 0;
+    padding: 10px 5px;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+}
+
 .ExpenseRow .list-group-item-heading,
 .ExpenseRow .list-group-item-text {
     margin: 15px 5px;

@@ -2,6 +2,8 @@
 
 module.exports = {
 
+    DATE_FORMAT: "ddd, MMM DD",
+
     ADD_EXPENSE:    "ADD_EXPENSE",
     DELETE_EXPENSE: "DELETE_EXPENSE",
 
@@ -43,8 +45,8 @@ module.exports = {
             icon: "shopping-cart"
         },
         {
-            name: "Activity",
-            icon: "music"
+            name: "Event",
+            icon: "film"
         },
         {
             name: "Work Expense",
