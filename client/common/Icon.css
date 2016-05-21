@@ -1,4 +1,4 @@
-.Icon .glyphicon {
+.Icon .icon {
     font-size: 24px;
     margin-top: 5px;
     margin-bottom: 10px;
@@ -7,19 +7,4 @@
 .Icon .icon-label {
     display: block;
     text-align: center;
-}
-
-.Icon .glyphicon.spinning {
-    animation: spin 1s infinite linear;
-    -webkit-animation: spin2 1s infinite linear;
-}
-
-@keyframes spin {
-    from { transform: scale(1) rotate(0deg); }
-    to { transform: scale(1) rotate(360deg); }
-}
-
-@-webkit-keyframes spin2 {
-    from { -webkit-transform: rotate(0deg); }
-    to { -webkit-transform: rotate(360deg); }
 }

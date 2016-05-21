@@ -16,11 +16,11 @@ module.exports = {
         },
         {
             name: "Coffee",
-            icon: "leaf"
+            icon: "fa-coffee"
         },
         {
             name: "Drinks",
-            icon: "glass"
+            icon: "fa-beer"
         },
         {
             name: "Gas",
@@ -28,11 +28,11 @@ module.exports = {
         },
         {
             name: "Transport",
-            icon: "road"
+            icon: "fa-bus"
         },
         {
             name: "Vacation",
-            icon: "plane"
+            icon: "fa-plane"
         },
         {
             name: "Household Goods",

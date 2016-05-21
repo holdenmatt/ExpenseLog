@@ -1,6 +1,9 @@
 # ExpenseLog
 
-A simple daily tracker for travel expenses.
+A simple daily expense tracker for mobile web.
+
+Optimized for quick entry of expenses in various (customizable) categories,
+and automatic export to Google Spreadsheets.
 
 Built using:
 * Backbone to manage models, events, and syncing
@@ -10,6 +13,7 @@ Built using:
 * Postgres + SQLAlchemy for persistence
 * Browserify to build; Bower to install front-end libs
 * Babel for ES2015 + JSX transpilation
+* Heroku for deployment
 
 
 ### Install
