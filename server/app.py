@@ -18,8 +18,9 @@ class Expense(db.Model):
 
 db.create_all()
 
+results_per_page = app.config['RESULTS_PER_PAGE']
 manager = APIManager(app, flask_sqlalchemy_db=db)
-manager.create_api(Expense, methods=['GET', 'POST', 'DELETE'])
+manager.create_api(Expense, methods=['GET', 'POST', 'DELETE'], results_per_page=results_per_page)
 
 @app.route('/')
 def index():
