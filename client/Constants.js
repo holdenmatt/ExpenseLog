@@ -9,48 +9,36 @@ module.exports = {
 
     CATEGORIES: [
         {
-            name: "Groceries",
-            icon: "apple"
-        },
-        {
-            name: "Eating out",
+            name: "Eating Out",
             icon: "cutlery"
         },
         {
-            name: "Coffee",
-            icon: "fa-coffee"
-        },
-        {
-            name: "Drinks",
-            icon: "fa-beer"
-        },
-        {
-            name: "Gas",
-            icon: "tint"
-        },
-        {
-            name: "Transport",
-            icon: "fa-bus"
-        },
-        {
-            name: "Vacation",
-            icon: "fa-plane"
+            name: "Groceries",
+            icon: "apple"
         },
         {
             name: "Household Goods",
             icon: "home"
         },
         {
+            name: "Transport",
+            icon: "fa-bus"
+        },
+        {
+            name: "Services",
+            icon: "scissors"
+        },
+        {
+            name: "Vacation",
+            icon: "fa-plane"
+        },
+        {
             name: "Shopping",
             icon: "shopping-cart"
         },
         {
-            name: "Event",
+            name: "Entertainment",
             icon: "film"
-        },
-        {
-            name: "Work Expense",
-            icon: "briefcase"
         },
         {
             name: "Other",
